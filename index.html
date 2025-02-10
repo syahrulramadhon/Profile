@@ -11,14 +11,13 @@
     <style>
         html {
             scroll-behavior: smooth;
-            scroll-padding-top: 80px; /* Adjusted for fixed navbar */
+            scroll-padding-top: 30px; /* Adjusted for fixed navbar */
         }
         .hero {
             background-image: url('img/autumn.jpg'); /* Replace with your hero image */
             background-size: cover;
             background-position: center;
             height: 100vh;
-            padding-top: 80px; /* Tambahkan padding atas */
             position: center;
             z-index: 1;
         }
@@ -47,14 +46,20 @@
     </style>
 </head>
 <body class="bg-orange-100 text-brown-900">
-    <nav class="fixed w-full text-white shadow-lg py-4 px-6 flex justify-between items-center z-50 navbar-solid">
+    <nav id="navbar" class="fixed w-full text-white shadow-lg py-4 px-6 flex justify-between items-center z-50 navbar-solid">
         <a class="text-2xl font-bold" href="#">My Portfolio</a>
-        <ul class="hidden md:flex space-x-6">
-            <li><a class="hover:text-yellow-300" href="#home">Home</a></li>
-            <li><a class="hover:text-yellow-300" href="#about">About</a></li>
-            <li><a class="hover:text-yellow-300" href="#project">Projects</a></li>
-            <li><a class="hover:text-yellow-300" href="#skills">Skills</a></li>
-            <li><a class="hover:text-yellow-300" href="#contact">Contact</a></li>
+
+        <!-- Toggle Button -->
+        <button id="menu-toggle" class="md:hidden focus:outline-none text-2xl">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <ul id="menu" class="hidden md:flex md:space-x-6 absolute md:static top-16 left-0 w-full md:w-auto navbar-solid md:bg-transparent flex-col md:flex-row items-center md:items-center space-y-4 md:space-y-0 p-6 md:p-0">
+            <li><a class="block hover:text-yellow-300" href="#home">Home</a></li>
+            <li><a class="block hover:text-yellow-300" href="#about">About</a></li>
+            <li><a class="block hover:text-yellow-300" href="#project">Projects</a></li>
+            <li><a class="block hover:text-yellow-300" href="#skills">Skills</a></li>
+            <li><a class="block hover:text-yellow-300" href="#contact">Contact</a></li>
         </ul>
     </nav>
     
@@ -152,5 +157,48 @@
             </button>
         </div>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navbar = document.getElementById('navbar');
+
+            window.addEventListener('scroll', function() {
+                const heroSection = document.getElementById('home');
+                const heroSectionHeight = heroSection.clientHeight;
+                const currentScroll = window.scrollY;
+
+                if (currentScroll < heroSectionHeight) {
+                    navbar.style.display = 'none';
+                } else {
+                    navbar.style.display = 'flex'; // atau 'block' sesuai dengan tampilan aslinya
+                }
+            });
+        });
+
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navbar = document.getElementById('navbar');
+            const menuToggle = document.getElementById('menu-toggle');
+            const menu = document.getElementById('menu');
+
+            window.addEventListener('scroll', function() {
+                const heroSection = document.getElementById('home');
+                const heroSectionHeight = heroSection.clientHeight;
+                const currentScroll = window.scrollY;
+
+                if (currentScroll < heroSectionHeight) {
+                    navbar.style.display = 'none';
+                } else {
+                    navbar.style.display = 'flex';
+                }
+            });
+
+            menuToggle.addEventListener('click', function() {
+                menu.classList.toggle('hidden');
+            });
+        });
+    </script>
 </body>
 </html>
