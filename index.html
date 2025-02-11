@@ -28,6 +28,12 @@
         .navbar-solid {
             background-color: rgba(139, 69, 19, 1); /* Cokelat solid */
         }
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 2;
+        }
         .navbar a {
             color: #FFF8DC; /* Warna krem */
         }
@@ -43,31 +49,46 @@
             background-color: #A52A2A; /* Merah marun */
             border-color: #A52A2A;
         }
+        .section-header {
+            background-color: #FFDAB9;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        .project-card{
+            background-color: #FAE3C6;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            transition: 0.3s;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+        .project-card:hover{
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        }
     </style>
 </head>
 <body class="bg-orange-100 text-brown-900">
-    <nav id="navbar" class="fixed w-full text-white shadow-lg py-4 px-6 flex justify-between items-center z-50 navbar-solid">
+    <nav id="navbar" class="navbar text-white shadow-lg py-4 px-6 flex justify-between items-center z-50 navbar-solid">
         <a class="text-2xl font-bold" href="#">My Portfolio</a>
 
-        <!-- Toggle Button -->
-        <button id="menu-toggle" class="md:hidden focus:outline-none text-2xl">
-            <i class="fa-solid fa-bars"></i>
-        </button>
-
-        <ul id="menu" class="hidden md:flex md:space-x-6 absolute md:static top-16 left-0 w-full md:w-auto navbar-solid md:bg-transparent flex-col md:flex-row items-center md:items-center space-y-4 md:space-y-0 p-6 md:p-0">
+        <ul class="hidden md:flex md:space-x-6 relative md:absolute left-1/2 transform -translate-x-1/2 top-16 md:top-auto flex-col md:flex-row items-center space-y-4 md:space-y-0 p-6 md:p-0">
             <li><a class="block hover:text-yellow-300" href="#home">Home</a></li>
             <li><a class="block hover:text-yellow-300" href="#about">About</a></li>
             <li><a class="block hover:text-yellow-300" href="#project">Projects</a></li>
             <li><a class="block hover:text-yellow-300" href="#skills">Skills</a></li>
             <li><a class="block hover:text-yellow-300" href="#contact">Contact</a></li>
-        </ul>
+        </ul>              
+
+        <a class="text-2xl font-bold" href="https://github.com/syahrulramadhon" target="_blank"><i class="fab fa-github"></i></a>
     </nav>
     
     <section id="home" class="hero flex items-center justify-center text-center text-white">
         <div class="hero-content">
             <h1 class="text-6xl font-bold">Welcome to My Portfolio</h1>
             <p class="mt-4 text-2xl">Discover My Work and Passion</p>
-            <button onclick="window.location.href='#about'" class="mt-8 px-6 py-2 btn-autumn text-white rounded-lg">View More</button>
+            <button id="viewMoreBtn" onclick="window.location.href='#about'" class="mt-8 px-6 py-2 btn-autumn text-white rounded-lg">View More</button>
         </div>
     </section>
 
@@ -82,20 +103,20 @@
     <section id="project" class="mt-12 px-6">
         <h2 class="text-3xl font-bold text-center">Projects</h2>
         <div class="mt-6 flex flex-wrap justify-center gap-6">
-            <div class="bg-white p-6 shadow-lg rounded-lg text-center w-full md:w-1/3">
+            <div class="bg-white p-6 shadow-lg rounded-lg text-center w-full md:w-1/3 project-card">
                 <h3 class="text-xl font-bold">iKansea Ecommerce website</h3>
                 <p class="mt-2">Fish shopping website using Laravel PHP.</p>
                 <a href="https://github.com/romiriquelme/iKansea_Ecommerce.git" class="mt-4 block text-orange-600 font-bold">View Project</a>
             </div>
-            <div class="bg-white p-6 shadow-lg rounded-lg text-center w-full md:w-1/3">
+            <div class="bg-white p-6 shadow-lg rounded-lg text-center w-full md:w-1/3 project-card">
                 <h3 class="text-xl font-bold">Sepatu Store</h3>
                 <p class="mt-2">Shoe shopping website using laravel 11 and simple design.</p>
                 <a href="https://github.com/syahrulramadhon/sepatu_store_laravel11.git" class="mt-4 block text-orange-600 font-bold">View Project</a>
             </div>
-            <div class="bg-white p-6 shadow-lg rounded-lg text-center w-full md:w-1/3">
+            <div class="bg-white p-6 shadow-lg rounded-lg text-center w-full md:w-1/3 project-card">
                 <h3 class="text-xl font-bold">Rock, Paper, Scisscors</h3>
-                <p class="mt-2">Simple game using HTML CSS and Java script.</p>
-                <a href="https://github.com/syahrulramadhon/Rock-Paper-Scisscors-Java-Script.git" class="mt-4 block text-orange-600 font-bold">View Project</a>
+                <p class="mt-2">Simple game using HTML CSS and JavaScript.</p>
+                <a href="https://github.com/syahrulramadhon/Rock-Paper-Scissors.git" class="mt-4 block text-orange-600 font-bold">View Project</a>
             </div>
         </div>
     </section>
@@ -140,8 +161,8 @@
                 <h3 class="text-xl font-bold mt-2">SQL</h3>
             </div>
         </div>
-    </section>
-
+    </section>   
+    
     <footer id="contact" class="mt-12 bg-orange-200 py-12 px-6 text-center rounded-lg">
         <h2 class="text-3xl font-bold">Contact</h2>
         <p class="mt-4">Feel free to reach out through the following channels:</p>
@@ -161,42 +182,30 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const navbar = document.getElementById('navbar');
+            const viewMoreButton = document.getElementById('viewMoreBtn');
+            const aboutSection = document.getElementById('about');
 
-            window.addEventListener('scroll', function() {
-                const heroSection = document.getElementById('home');
-                const heroSectionHeight = heroSection.clientHeight;
-                const currentScroll = window.scrollY;
+            // Sembunyikan navbar saat halaman pertama kali dimuat
+            navbar.style.visibility = 'hidden';
+            navbar.style.opacity = '0';
+            navbar.style.transition = 'visibility 0.3s, opacity 0.3s ease';
 
-                if (currentScroll < heroSectionHeight) {
-                    navbar.style.display = 'none';
-                } else {
-                    navbar.style.display = 'flex'; // atau 'block' sesuai dengan tampilan aslinya
-                }
-            });
-        });
-
-    </script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const navbar = document.getElementById('navbar');
-            const menuToggle = document.getElementById('menu-toggle');
-            const menu = document.getElementById('menu');
-
-            window.addEventListener('scroll', function() {
-                const heroSection = document.getElementById('home');
-                const heroSectionHeight = heroSection.clientHeight;
-                const currentScroll = window.scrollY;
-
-                if (currentScroll < heroSectionHeight) {
-                    navbar.style.display = 'none';
-                } else {
-                    navbar.style.display = 'flex';
-                }
+            // Tampilkan navbar saat tombol "View More" diklik
+            viewMoreButton.addEventListener('click', function() {
+                navbar.style.visibility = 'visible';
+                navbar.style.opacity = '1';
             });
 
-            menuToggle.addEventListener('click', function() {
-                menu.classList.toggle('hidden');
+            // Tampilkan navbar saat menggulir ke bagian "About Me" dan seterusnya
+            window.addEventListener('scroll', function() {
+                const currentScroll = window.scrollY;
+                if (currentScroll >= aboutSection.offsetTop - navbar.offsetHeight) {
+                    navbar.style.visibility = 'visible';
+                    navbar.style.opacity = '1';
+                } else {
+                    navbar.style.visibility = 'hidden';
+                    navbar.style.opacity = '0';
+                }
             });
         });
     </script>
